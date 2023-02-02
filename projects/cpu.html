@@ -1,0 +1,7 @@
+<p><span>​The way I did this was by, for the most part, following along with the videos. I implemented the ALU, registers, and a 7-segment display driver.</span></p>
+<p>I then expanded on the registers, using multiplexers and demultiplexers to first make an addressable collection of four 4-bit registers, and then a collection of four 4x4 RAM modules. You could expand those to be much larger, but since I'm making a 4-bit computer here, I didn't.</p>
+<p>I used the 7 segment display driver from the third episode, and modified the bus test from the most recent (fourth) DLS video.​</p>
+<p>I integrated the 16x4 RAM unit I made into this test, and added a third register -- the Memory Address Register, or MAR, which controls what address the RAM is looking at. However, you may be wondering why it's "almost" a 4 bit CPU, and why the RAM isn't providing instructions to the CPU. The "CPU" is almost a CPU, because it's not quite finished.&nbsp;As of now, the chip only takes in control signals to do things, which I'm referring to as microcode. My next step will be to create a module to translate instructions from possibly a larger RAM, like 8 bits instead of 4, or simply program instructions as pure microcode into something like 16-bit-wide RAM, as well as create a binary counter to step through programs.</p>
+<p>​However, the "CPU" as of right now is functional, insofar as being able to run programs if you were to punch them in by hand.</p>
+<p>I'll put up an instruction set once I figure that sort of thing out.​</p>
+<p>​</p>
