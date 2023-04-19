@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+
+<title>killa's blog</title>
+
+<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?">
+
+<html>
+<body>
+  <h1>TOS & privacy policy</h1>
+  <br><br>
+  <p> Hello! You're probably looking at this because you want to find the ToS/privacy policy for my Discord logger bot. <br><br>
+Firstly, here's the github link: https://github.com/Killaship/loggerbot/tree/main. <br><br> Secondly, here's basically our TOS/privacy policy:<br>In no way am I logging your messages on my computer or anything, but edited and deleted messages and their content, as well as who sent it and a timestamp, are all stored in a logs channel on the discord server. If you have a problem with it, talk to admins, not me.<br><br>Now, about the terms of service. <i>Nobody is exempt from logging.</i> If someone spun up their own bot that has exemptions, it's not my bot. The only way anyone would be exempt from logging would be if it's in designated channels where bot messages are often deleted, so as to not clog up the logs.<br><br><br>Thanks for your understanding!<br><i><b>Last edited 4:04 PM 4/19/2023</b></i></p>
+  <button>
+  <a href="/index.html">Home Page</a>
+</button>
+  </body>
+</html>
