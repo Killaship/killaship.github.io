@@ -16,18 +16,59 @@ body {
 }
 
 .dark-mode {
-  background-color: black;
-  color: white;
+  background-color: gray;
+  color: black;
 }
 </style>
 
-<button onclick="myFunction()">Toggle dark mode</button>
+<button onclick="myFunction(0)">Toggle dark mode</button>
 
 <script>
-function myFunction() {
+var i = 0;
+if(getCookie("theme") == "dark") {
+	//document.body.innerHTML = "a";
+	//element.classList.toggle("dark-mode");
+    i = 1;
+    
+}
+function getCookie(cname) {
+ 
+  let name = cname + "=";
+  let decodedCookie = decodeURIComponent(document.cookie);
+  let ca = decodedCookie.split(';');
+  for(let i = 0; i <ca.length; i++) {
+    let c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+    	//document.body.innerHTML = c.substring(name.length, c.length);
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
+}
+if(i == 1) {
+   	element.classList.toggle("dark-mode");
+    document.cookie = "theme=dark; expires=Fri, 31 Dec 9999 23:59:59 GMT; path=/";
+}
+function myFunction(i) {
    var element = document.body;
    element.classList.toggle("dark-mode");
+   if(getCookie("theme") == "white") {
+       element.classList.toggle("dark-mode");
+       document.cookie = "theme=dark; expires=Fri, 31 Dec 9999 23:59:59 GMT; path=/";
+   }
+   if(getCookie("theme") == "dark") {
+       element.classList.toggle("dark-mode");
+       document.cookie = "theme=white; expires=Fri, 31 Dec 9999 23:59:59 GMT; path=/";
+   }   
+
+   
+   
+
 }
+
 </script>
 <br><br>
   <button>
