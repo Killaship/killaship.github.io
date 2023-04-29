@@ -1,11 +1,12 @@
-<!DOCTYPE html>
-
-<title>404's blog</title>
+<title>settings</title>
 
 <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?">
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?">
+
+<h3><b> settings </b></h3>
+<br><br>
 <style>
 body {
   padding: 25px;
@@ -19,7 +20,7 @@ body {
   color: black;
 }
 </style>
-
+<button onclick="myFunction()">Toggle dark mode</button>
 
 <script>
   var element = document.body;
@@ -54,14 +55,29 @@ function getCookie(cname) {
   }
   return "";
 }
+
+function myFunction() {
+   console.log("click")
+   
+
+   if(getCookie("theme") == "white") {
+       element.classList.toggle("dark-mode");
+       console.log("cookie was white")
+       document.cookie = "theme=dark; expires=Fri, 31 Dec 9999 23:59:59 GMT; path=/";
+       console.log("'" + getCookie("theme") + "'")
+      return;
+   }
+   if(getCookie("theme") == "dark") {
+       element.classList.toggle("dark-mode");
+       console.log("cookie was dark")
+       document.cookie = "theme=white; expires=Fri, 31 Dec 9999 23:59:59 GMT; path=/";
+       console.log("'" + getCookie("theme") + "'")
+     return;
+   }   
+}
+
 </script>
-<html>
-<body>
-  <h1>404</h1>
-  <br><br>
-  <p> You tried going somewhere that doesn't exist. Go back home, or just sit here and cry. </p>
+<br><br>
   <button>
   <a href="/index.html">Home Page</a>
 </button>
-  </body>
-</html>
