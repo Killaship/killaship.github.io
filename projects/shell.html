@@ -27,6 +27,7 @@ body {
 
 
 <script>
+const version = "v0.1.1"
 const start = Date.now(); // Page load time
 var input = document.getElementById('textbox');
 var log = document.getElementById('log');
@@ -73,6 +74,8 @@ function execute(rawstr) {
     print("<b>about</b><br><i>Displays some information about this project</i><br>");
     print("<b>uptime</b><br><i>Display how long this has been running for<i><br>");
     print("<b>clear</b><br><i>Clears the command history<i><br>");
+    print("<b>eval</b><br><i>Evaluates the Javascript code passed to this<i><br>");
+    print("<b>version</b><br><i>Prints the version of the shell currently running<i><br>");
   }
   else if(command == "about") {
     print("<b>(c) Killaship 2023</b><br>This project was originally made to simulate the Heartbleed bug in OpenSSL back from 2014, but it turns out that implementing the shell was much more interesting than whatever else I was going to do, so I continued working on just the shell instead, so here we are. I hope you like it!")
@@ -91,6 +94,12 @@ function execute(rawstr) {
   else if(command == "clear") {
     log.innerHTML = "";
     welcome(1);
+  }
+  else if(command == "eval") {
+    eval(tokens[1]);
+  }
+  else if(command == "version") {
+    print("<b>(c) Killaship 2023</b><br>" + version);
   }
   else {
     print("invalid command");
