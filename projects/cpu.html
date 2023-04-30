@@ -6,53 +6,10 @@
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?">
 <style>
 body {
-  padding: 25px;
-  background-color: white;
-  color: black;
-  font-size: 25px;
-}
-
-.dark-mode {
-  background-color: gray;
-  color: black;
-}
+  background-color: darkslategray;
+  color: white;
+}  
 </style>
-
-
-<script>
-  var element = document.body;
-try {
-if(getCookie("theme") == "") {
-  console.log("sjdhfgh")
-  document.cookie = "theme=white; expires=Fri, 31 Dec 9999 23:59:59 GMT; path=/";
-}
-console.log("'" + getCookie("theme") + "'")
-if(getCookie("theme") == "dark") {
-  
-  console.log("theme cookie says dark")
-   	element.classList.toggle("dark-mode");
-    document.cookie = "theme=dark; expires=Fri, 31 Dec 9999 23:59:59 GMT; path=/";
-    
-}
-} catch(err) {console.log(err)}
-function getCookie(cname) {
- 
-  let name = cname + "=";
-  let decodedCookie = decodeURIComponent(document.cookie);
-  let ca = decodedCookie.split(';');
-  for(let i = 0; i <ca.length; i++) {
-    let c = ca[i];
-    while (c.charAt(0) == ' ') {
-      c = c.substring(1);
-    }
-    if (c.indexOf(name) == 0) {
-    	//document.body.innerHTML = c.substring(name.length, c.length);
-      return c.substring(name.length, c.length);
-    }
-  }
-  return "";
-}
-</script>
 <h3><b> 4-bit CPU </b><h3><br><br>
 
 <p><span>​The way I did this was by, for the most part, following along with the videos. I implemented the ALU, registers, and a 7-segment display driver.</span></p>
