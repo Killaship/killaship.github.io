@@ -1,0 +1,119 @@
+<title>killa's blog</title>
+
+<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?">
+
+<h1><b> Javascript Shell </b></h1><i>a text box I'm quite proud of</i><br><br>
+<link href="https://fonts.googleapis.com/css2?family=Ubuntu+Mono&display=swap" rel="stylesheet">
+<style>
+body {
+  padding: 25px;
+  background-color: darkslategray;
+  color: white;
+}  
+.dark {
+  background-color: black; 
+  color: white;
+  font-family: "Ubuntu Mono", "Helvetica", sans-serif; /* Ubuntu Mono, Helvetica if error */
+}
+  
+</style>
+
+<input type="text" id="textbox" name="textbox">
+<button id = "submitbutton" onclick="shell()"> Enter </button>
+<div class='dark' id='log' style="height:270px;width:600px;border:1px solid #ccc;overflow:auto;"></div>
+
+
+<script>
+const start = Date.now(); // Page load time
+var input = document.getElementById('textbox');
+var log = document.getElementById('log');
+
+// just to make the code more readable
+function print(text) {
+  log.innerHTML+= text;
+}
+
+// also to make code more readable
+function showprompt() {
+  print(">  ");
+}
+
+// initial messages
+function welcome(i) {
+  print("type 'help' for list of commands<br>press the 'enter' button or key to enter a command<br>");
+  if(i != 1) {
+    print("<br>>  "); // Add shell prompt for first run, but ignore if i = 1
+  }
+}
+welcome(); // this same function can later be used when clearing the shell history
+
+// handles clearing input box and auto scrolling
+function cleanup() {
+  input.value = "";
+  log.scrollTop = log.scrollHeight;
+}
+
+// code to enter text typed on "enter" key
+input.addEventListener("keyup", function(event) {
+    event.preventDefault();
+    if (event.keyCode === 13) { // if it's the enter key
+        document.getElementById("submitbutton").click(); // click the "Enter" button
+    }
+});
+
+// handles command parsing and running
+function execute(rawstr) {
+  const tokens = rawstr.split(" "); // tokenize the string
+  var command = tokens[0];
+  // print("<b>[command_name]</b><br><i>[command_description]<i><br>");
+  if(command == "help") {
+    print("<b>about</b><br><i>Displays some information about this project</i><br>");
+    print("<b>uptime</b><br><i>Display how long this has been running for<i><br>");
+    print("<b>clear</b><br><i>Clears the command history<i><br>");
+  }
+  else if(command == "about") {
+    print("<b>(c) Killaship 2023</b><br>This project was originally made to simulate the Heartbleed bug in OpenSSL back from 2014, but it turns out that implementing the shell was much more interesting than whatever else I was going to do, so I continued working on just the shell instead, so here we are. I hope you like it!")
+  }
+  else if(command == "uptime") {
+    timesinceload = Date.now() - start;
+    seconds = Math.floor(timesinceload / 1000);
+    days = Math.floor(seconds / 86400);
+    hours = Math.floor((seconds - (days * 86400)) / 3600);
+    minutes = Math.floor((seconds - (days * 86400) - (hours * 3600)) / 60);
+    seconds = seconds % 60;
+    minutes = minutes % 60;
+    hours = hours % 24;
+    print("uptime: " + days + " days, " + hours + " hours, " + minutes + " minutes, " + seconds + " seconds");
+  }
+  else if(command == "clear") {
+    log.innerHTML = "";
+    welcome(1);
+  }
+  else {
+    print("invalid command");
+  }
+  print("<br>");
+}
+  
+// handles making new prompts, commands
+function shell() {
+  command = input.value;
+  print(command + "<br>");
+  if(command != "") {execute(command);} // only execute command if there's something there
+  showprompt(); // only display prompt AFTER output has been displayed
+  cleanup(); // autoscroll, clear input box
+  
+}
+
+
+</script>
+
+
+
+<br>
+<button>
+  <a href="/index.html">Home</a>
+</button>
