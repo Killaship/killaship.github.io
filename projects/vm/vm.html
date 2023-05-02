@@ -1,0 +1,152 @@
+<title>killa's blog</title>
+
+<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?">
+
+<h1><b> Javascript VM </b></h1><i>an imaginary CPU</i><br><br>
+<link href="https://fonts.googleapis.com/css2?family=Ubuntu+Mono&display=swap" rel="stylesheet">
+<style>
+body {
+  padding: 25px;
+  background-color: darkslategray;
+  color: white;
+}  
+.dark {
+  background-color: black; 
+  color: white;
+  font-family: "Ubuntu Mono", "Helvetica", sans-serif; /* Ubuntu Mono, Helvetica if error */
+}
+.log {
+  background-color: beige; 
+  color: black;
+  font-family: "Ubuntu Mono", "Helvetica", sans-serif; /* Ubuntu Mono, Helvetica if error */
+}
+</style>
+
+<input type="text" id="textbox" name="textbox">
+<button id = "submitbutton" onclick="run()"> Execute </button>
+<div class='dark' id='display' style="height:270px;width:600px;border:1px solid #ccc;overflow:auto;"></div><br>
+<div class='log' id='log' style="height:270px;width:600px;border:1px solid #ccc;overflow:auto;"></div>
+
+
+<script>
+var running = 1;
+var sp = 128;
+var ip = 0;
+var a = 0;
+var b = 0;
+var c = 0;
+var d = 0;  
+const timer = Date.now(); // Page load time
+
+var input = document.getElementById('textbox');
+var display = document.getElementById('display');
+var log = document.getElementById('log');
+function jump(addr) {
+  ip = addr;
+  logprint(`Jumped to 0x${ip.toString(16)}, sp=0x${sp.toString(16)}, a=0x${a.toString(16)}, b=0x${b.toString(16)}, c=0x${c.toString(16)}, d=0x${d.toString(16)}<br>`);
+}
+async function execute(program) {
+  var mem = Array(3000).fill(0);
+  
+  for(var i = 0; i < program.length; i++) {
+    mem[i] = program[i];
+  }
+
+  while(running) {
+    switch(mem[ip]) {
+      case '0':
+        logprint(`NOP at 0x${ip.toString(16)}, sp=0x${sp.toString(16)}, a=0x${a.toString(16)}, b=0x${b.toString(16)}, c=0x${c.toString(16)}, d=0x${d.toString(16)}<br>`);
+        ip++;
+        break;
+      case '1':
+        logprint(`JMP at 0x${ip.toString(16)}, sp=0x${sp.toString(16)}, a=0x${a.toString(16)}, b=0x${b.toString(16)}, c=0x${c.toString(16)}, d=0x${d.toString(16)}<br>`);
+        jump(mem[ip+1]);
+        break;
+      case '2':
+        break;
+      case '3':
+        break; 
+      case '4':
+        break;
+      case '4':
+        break;
+      case '6':
+        break;     
+      case '7':
+        break; 
+      case '8':
+        break; 
+      case '9':
+        break; 
+      case 'a':
+        break; 
+      case 'b':
+        break; 
+      case 'c':
+        break; 
+      case 'd':
+        break; 
+      case 'e':
+        break; 
+      case 'f': // HLT
+        running = 0;
+        break; 
+      case 0: // NULL, serves same purpose as HLT
+        running = 0;
+        break;
+      default:
+        running = 0;
+        logprint("Undefined instruction at 0x" + ip.toString(16) + ", instruction = 0x" + mem[ip].toString(16) + " (execution halted)<br>");
+        break;
+    }
+    await new Promise(resolve => setTimeout(resolve, 100));
+  }
+}
+
+function logprint(text) {
+  log.innerHTML+= text;
+  log.scrollTop = log.scrollHeight;
+}
+  
+function print(text) {
+  display.innerHTML+= text;
+}
+
+
+function autoscroll() {
+  display.scrollTop = log.scrollHeight;
+}
+
+// code to enter text typed on "enter" key
+input.addEventListener("keyup", function(event) {
+    event.preventDefault();
+    if (event.keyCode === 13) { // if it's the enter key
+        document.getElementById("submitbutton").click(); // click the "Enter" button
+    }
+});
+
+  
+// handles making new prompts, commands
+function run() {
+   log.innerHTML = "";
+   display.innerHTML = "";
+   prog = input.value.split(""); // Not unicode safe, but then again, all the more fun to make stuff explode
+  console.log(prog);
+  if(prog != "") {execute(prog);} 
+  
+}
+
+
+</script>
+
+<br>
+<button>
+  <a href="documentation.html">CPU Documentation</a>
+</button>
+<br>
+<button>
+  <a href="/index.html">Home</a>
+</button>
