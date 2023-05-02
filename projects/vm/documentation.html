@@ -1,0 +1,66 @@
+<title>killa's blog</title>
+
+<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?">
+
+<h1><b> Javascript VM </b></h1><i>how to use it</i><br><br>
+<style>
+body {
+  padding: 25px;
+  background-color: darkslategray;
+  color: white;
+}  
+</style>
+
+0 NOP [0]: do nothing<br><br>
+
+1 JMP [1, A]: jump to A, unconditionally<br><br>
+
+2 JNZ [2, A, B]: if A isn't equal to zero, jump to the value of B<br><br>
+
+3 ADD [3, A, B, C]:<br><br>
+
+if C is 0, add reg $A and mem B, store in A<br>
+if C is 1, add reg $A and reg $B, store in A<br>
+if C is 2, add mem A and mem B, store in reg A<br><br>
+
+4 SUB [4, A, B, C]:<br><br>
+
+if C is 0, subtract mem B from reg $A, store in reg A<br>
+if C is 1, subtract reg $B from reg $A, store in reg A<br>
+if C is 2, subtract mem B from mem B, store in reg A<br><br>
+
+5 PSH [5, A]: push the value of register $A to the stack<br><br>
+
+6 POP [6, A]: pop the top value on the stack, into register $A<br><br>
+
+7 MOV [7, B, C]:<br><br>
+
+if C is 0, move reg $A to mem B<br>
+if C is 1, move reg $A to reg $B<br>
+if C is 2, move mem A to mem B<br><br>
+
+8 OUT [8, A]: outputs the content of the OUT register on port $A<br><br>
+
+9 IN [9, A]: reads in from port $A, puts it in register IN<br><br>
+
+A LIT [0xA, A]: loads interrupt table, starting from memory A<br><br>
+
+B INC [0xB]: increment register A by 1<br><br>
+
+C DEC [0xC, A, B]: decrement register B by 1<br><br>
+
+D RET [0xD]: return from an interrupt handler<br><br>
+
+E INT [0xE, A]: call interrupt $A, also pushes return address to stack<br><br>
+
+F HLT [0xF]: halts CPU execution immediately<br><br>
+
+<button>
+  <a href="vm.html">Back</a>
+</button><br><br>
+<button>
+  <a href="/index.html">Home</a>
+</button>
