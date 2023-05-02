@@ -12,51 +12,131 @@ body {
   background-color: darkslategray;
   color: white;
 }  
+
+table {
+  color: white;
+}  
+
 </style>
 
-0 NOP [0]: do nothing<br><br>
+<h2><b> Opcodes </b></h2>
 
-1 JMP [1, A]: jump to A, unconditionally<br><br>
+0 <b>NOP</b> [0]: do nothing<br><br>
 
-2 JNZ [2, A, B]: if A isn't equal to zero, jump to the value of B<br><br>
+1 <b>JMP</b> [1, A]: jump to A, unconditionally<br><br>
 
-3 ADD [3, A, B, C]:<br><br>
+2 <b>JNZ</b> [2, A, B]: if A isn't equal to zero, jump to the value of B<br><br>
+
+3 <b>ADD</b> [3, A, B, C]:<br><br>
 
 if C is 0, add reg $A and mem B, store in A<br>
 if C is 1, add reg $A and reg $B, store in A<br>
 if C is 2, add mem A and mem B, store in reg A<br><br>
 
-4 SUB [4, A, B, C]:<br><br>
+4 <b>SUB</b> [4, A, B, C]:<br><br>
 
 if C is 0, subtract mem B from reg $A, store in reg A<br>
 if C is 1, subtract reg $B from reg $A, store in reg A<br>
 if C is 2, subtract mem B from mem B, store in reg A<br><br>
 
-5 PSH [5, A]: push the value of register $A to the stack<br><br>
+5 <b>PSH</b> [5, A]: push the value of register $A to the stack<br><br>
 
-6 POP [6, A]: pop the top value on the stack, into register $A<br><br>
+6 <b>POP</b> [6, A]: pop the top value on the stack, into register $A<br><br>
 
-7 MOV [7, B, C]:<br><br>
+7 <b>MOV</b> [7, B, C]:<br><br>
 
 if C is 0, move reg $A to mem B<br>
 if C is 1, move reg $A to reg $B<br>
 if C is 2, move mem A to mem B<br><br>
 
-8 OUT [8, A]: outputs the content of the OUT register on port $A<br><br>
+8 <b>OUT</b> [8, A]: outputs the content of the OUT register on port $A<br><br>
 
-9 IN [9, A]: reads in from port $A, puts it in register IN<br><br>
+9 <b>INP</b> [9, A]: reads in from port $A, puts it in register IN<br><br>
 
-A LIT [0xA, A]: loads interrupt table, starting from memory A<br><br>
+A <b>LVT</b> [0xA, A]: loads interrupt vector table, starting from memory A<br><br>
 
-B INC [0xB]: increment register A by 1<br><br>
+B <b>INC</b> [0xB]: increment register A by 1<br><br>
 
-C DEC [0xC, A, B]: decrement register B by 1<br><br>
+C <b>DEC</b> [0xC, A, B]: decrement register B by 1<br><br>
 
-D RET [0xD]: return from an interrupt handler<br><br>
+D <b>RET</b> [0xD]: return from an interrupt handler<br><br>
 
-E INT [0xE, A]: call interrupt $A, also pushes return address to stack<br><br>
+E <b>INT</b> [0xE, A]: call interrupt $A<br><br>
 
-F HLT [0xF]: halts CPU execution immediately<br><br>
+F <b>HLT</b> [0xF]: halts CPU execution immediately<br><br>
+
+<h2><b> Interrupts </b></h2>
+There are 2 ways of triggering interrupts. First is using the INT instruction, and the second is by having a device trigger one, or some sort of CPU exception happen.<br>
+With the interrupt table, it's a list of addresses to jump to for each interrupt. There's 16 possible interrupts, some of which are reserved for errors or common devices, and the rest can be used for general purpose. (see table)<br><br>
+<table class="table"><caption><strong> Interrupts #'s &amp; their uses </strong></caption>
+<tbody>
+<tr>
+<td>0x0</td>
+<td>Debug Exception</td>
+</tr>
+<tr>
+<td>0x1</td>
+<td>&nbsp;Invalid Opcode</td>
+</tr>
+<tr>
+<td>0x2</td>
+<td>&nbsp;Divide by Zero</td>
+</tr>
+<tr>
+<td>0x3</td>
+<td>&nbsp;Reserved</td>
+</tr>
+<tr>
+<td>0x4</td>
+<td>&nbsp;(Timer)</td>
+</tr>
+<tr>
+<td>0x5</td>
+<td>&nbsp;(Keyboard)</td>
+</tr>
+<tr>
+<td>0x6</td>
+<td>General Purpose</td>
+</tr>
+<tr>
+<td>0x7</td>
+<td>General Purpose</td>
+</tr>
+<tr>
+<td>0x8</td>
+<td>&nbsp;General Purpose</td>
+</tr>
+<tr>
+<td>0x9</td>
+<td>&nbsp;General Purpose</td>
+</tr>
+<tr>
+<td>0xA</td>
+<td>&nbsp;General Purpose</td>
+</tr>
+<tr>
+<td>0xB</td>
+<td>&nbsp;General Purpose</td>
+</tr>
+<tr>
+<td>0xC</td>
+<td>&nbsp;General Purpose</td>
+</tr>
+<tr>
+<td>0xD</td>
+<td>&nbsp;General Purpose</td>
+</tr>
+<tr>
+<td>0xE</td>
+<td>&nbsp;General Purpose</td>
+</tr>
+<tr>
+<td>0xF</td>
+<td>&nbsp;General Purpose</td>
+</tr>
+</tbody>
+</table>
+<br>
 
 <button>
   <a href="vm.html">Back</a>
