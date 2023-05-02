@@ -67,7 +67,8 @@ F <b>HLT</b> [0xF]: halts CPU execution immediately<br><br>
 
 <h2><b> Interrupts </b></h2>
 There are 2 ways of triggering interrupts. First is using the INT instruction, and the second is by having a device trigger one, or some sort of CPU exception happen.<br>
-With the interrupt table, it's a list of addresses to jump to for each interrupt. There's 16 possible interrupts, some of which are reserved for errors or common devices, and the rest can be used for general purpose. (see table)<br><br>
+With the interrupt table, it's a list of addresses to jump to for each interrupt. 16 consecutive memory locations, each of which hold an address.<br>
+There's 16 possible interrupts, some of which are reserved for errors or common devices, and the rest can be used for general purpose. (see table)<br><br>
 <table class="table"><caption><strong> Interrupts #'s &amp; their uses </strong></caption>
 <tbody>
 <tr>
@@ -136,8 +137,12 @@ With the interrupt table, it's a list of addresses to jump to for each interrupt
 </tr>
 </tbody>
 </table>
-<br>
-
+<h2><b> Stack </b></h2>
+The stack grows upward in memory, it's a FILO/LIFO thing, and the stack pointer defaults to memory location 0x80. (128)
+<br><br>
+<h2><b> Other useful info </b></h2>
+The small input box at the top is for inputting programs, and you just have to type a string of numbers, then hit the "Enter" button or press the enter key. The middle, large black box is for program output. The beige-yellow colored box at the bottom is for logging and debug output.
+<br><br>
 <button>
   <a href="vm.html">Back</a>
 </button><br><br>
